@@ -5,5 +5,6 @@ namespace LevelUp.CSharpJuniors.Project.DAL
     public interface IProductsRepository
     {
         public Task<IEnumerable<ProductEntity>> GetAllProducts();
+        public Task GetProduct(int id);
     }
 }

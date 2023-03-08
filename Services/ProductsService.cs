@@ -13,6 +13,12 @@ namespace LevelUp.CSharpJuniors.Project.Services
             _productsRepository = productsRepository;
         }
 
+        public async Task<object> GetProductById(int id)
+        {
+            object entity = await _productsRepository.GetProduct(id);
+            return entity.Select(e => new ProductItem(e.Id, e.Name, e.Description));
+        }
+
         public async Task<IEnumerable<ProductItem>> GetProducts()
         {
             var entities = await _productsRepository.GetAllProducts();
