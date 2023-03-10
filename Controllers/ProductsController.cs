@@ -26,7 +26,7 @@ namespace LevelUp.CSharpJuniors.Project.Controllers
 
         // GET api/<ProductsController>/5
         [HttpGet("{id}")]
-        public ActionResult<object> Get(int id)
+        public ActionResult<IEnumerable<ProductItem>> Get(Guid id)
         {
             var product = _productsService.GetProductById(id);
             return Ok(product);
