@@ -16,10 +16,10 @@ namespace LevelUp.CSharpJuniors.Project.DAL
             return Task.FromResult(Enumerable.Empty<ProductEntity>());
         }
 
-        public Task<ProductEntity> GetProduct(Guid id)
+        /*public Task<ProductEntity> GetProduct(Guid id)
         {
-            return Task.FromResult(result: productEntity);
-        }
+            return Task.FromResult<ProductEntity>(productEntity);
+        }*/
     }
 }
 

@@ -14,7 +14,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ProductsDbContext>();
 builder.Services.AddScoped<IProductsRepository, ProductsRepository>(); // когда в конструкторе будет прокидыватьс€ интерфейс - создай экземпл€р класса
 // addscope - будем создаватьс€ экземпл€р класса на каждый запрос, если синглтон - все будут работать с 1 экземпл€ром
-builder.Services.AddScoped<IProductsService, ProductsService>();
+builder.Services.AddSingleton<IProductsService, ProductsService>();
 
 var app = builder.Build();
 

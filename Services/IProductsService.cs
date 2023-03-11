@@ -1,10 +1,10 @@
 ﻿using LevelUp.CSharpJuniors.Project.Models;
-// документ, чтобы понять что класс делает
+// документ, чтобы понять что класс делает, контракт
 namespace LevelUp.CSharpJuniors.Project.Services
 {
     public interface IProductsService
     {
-        Task<ProductItem> GetProductById(Guid id);
+        Task<ProductItem> GetProductById(string id);
         Task<IEnumerable<ProductItem>> GetProducts();
     }
 }

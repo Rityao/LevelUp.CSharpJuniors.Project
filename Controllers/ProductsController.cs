@@ -1,6 +1,7 @@
 ﻿using LevelUp.CSharpJuniors.Project.Models;
 using LevelUp.CSharpJuniors.Project.Services;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,12 +25,20 @@ namespace LevelUp.CSharpJuniors.Project.Controllers
             return Ok(products);
         }
 
-        // GET api/<ProductsController>/5
         [HttpGet("{id}")]
-        public ActionResult<IEnumerable<ProductItem>> Get(Guid id)
+        public ActionResult<IEnumerable<ProductItem>> GetProductsById(string id)
         {
-            var product = _productsService.GetProductById(id);
-            return Ok(product);
+            var products = _productsService.GetProductById(id);
+            return Ok(products);
         }
+
+        /*   // GET api/<ProductsController>/5
+           [HttpGet("{id}")]
+           public ActionResult<IEnumerable<ProductItem>> Get(string id)
+           {
+               Guid guid = Guid.Parse(id);
+               var product = _productsService.GetProductById(guid);
+               return Ok(product);
+           } */
     }
 }
