@@ -1,14 +1,26 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
-using MyStore.UI.Data;
+using Microsoft.Extensions.Options;
+using MyStore.UI.Models;
+using MyStore.UI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
+builder.Services.AddScoped<IProductsServiceProxy, ProductsServiceProxy>();
 
+var endpoints = builder.Configuration.GetSection("Endpoints").Get<Endpoints>();
+builder.Services.AddHttpClient("default",
+    (c) =>
+    {
+        c.BaseAddress = new Uri(endpoints.BaseUrl);
+    });
+
+builder.Services.AddScoped<IOptions<Endpoints>>(_ => new OptionsWrapper<Endpoints>(endpoints));
+
+builder.Services.AddScoped<IProductsServiceProxy, ProductsServiceProxy>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,11 +33,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseStaticFiles();
+app.UseStaticFiles(); // для картинок
 
 app.UseRouting();
 
-app.MapBlazorHub();
-app.MapFallbackToPage("/_Host");
+app.MapBlazorHub(); // обработка запросов
+app.MapFallbackToPage("/_Host"); //если исключение, то будем попадать на эту страничку
 
 app.Run();

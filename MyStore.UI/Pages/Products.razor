@@ -1,0 +1,20 @@
+﻿@page "/products"
+@using MyStore.UI.Models
+@using MyStore.UI.Services
+
+@inject IProductsServiceProxy Proxy
+
+<h3>Products</h3>
+@foreach (var product in _products)
+{
+    <li>@($"{product.Id} - {product.Name} - {product.Description}")</li>
+}
+
+@code {
+    private IEnumerable<ProductItem> _products = Enumerable.Empty<ProductItem>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _products = await Proxy.GetAllProducts();
+    }
+}
