@@ -5,11 +5,27 @@
 @inject IProductsServiceProxy Proxy
 
 <h3>Products</h3>
-@foreach (var product in _products)
-{
-    <li>@($"{product.Id} - {product.Name} - {product.Description}")</li>
-}
-
+<h1>Weather forecast</h1>
+<p>This component demonstrates fetching data from a service.</p>
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in _products)
+            {
+                <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                </tr>
+            }
+        </tbody>
+</table>
 @code {
     private IEnumerable<ProductItem> _products = Enumerable.Empty<ProductItem>();
 
