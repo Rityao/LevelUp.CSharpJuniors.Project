@@ -27,5 +27,20 @@ namespace MyStore.API.DAL.Configurations
 
             builder.HasIndex(e => e.CategoryId);
         }
+        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<UserEntity> builder)
+        {
+            builder.ToTable("Users");
+
+            builder.HasKey(e => e.Id);
+
+            builder.Property(e => e.Name)
+                .IsRequired()
+                .HasColumnType("nvarchar")
+                .HasMaxLength(500);
+
+            builder.Property(e => e.IsAdmin)
+               .HasColumnType("bit");
+
+        }
     }
 }

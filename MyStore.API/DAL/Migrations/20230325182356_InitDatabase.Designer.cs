@@ -12,7 +12,7 @@ using MyStore.API.DAL;
 namespace MyStore.API.DAL.Migrations
 {
     [DbContext(typeof(ProductsDbContext))]
-    [Migration("20230325133732_InitDatabase")]
+    [Migration("20230325182356_InitDatabase")]
     partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
