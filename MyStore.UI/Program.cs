@@ -9,7 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddScoped<IProductsServiceProxy, ProductsServiceProxy>();
 
 var endpoints = builder.Configuration.GetSection("Endpoints").Get<Endpoints>();
 builder.Services.AddHttpClient("default",

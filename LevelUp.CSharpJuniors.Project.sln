@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyStore.API", "MyStore.API\MyStore.API.csproj", "{34DA8757-3926-46B1-92E7-51EC5D926F95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyStore.API", "MyStore.API\MyStore.API.csproj", "{34DA8757-3926-46B1-92E7-51EC5D926F95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyStore.UI", "MyStore.UI\MyStore.UI.csproj", "{0B36B7C5-3541-43B9-8A62-D8EEC4AE00DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyStore.UI", "MyStore.UI\MyStore.UI.csproj", "{0B36B7C5-3541-43B9-8A62-D8EEC4AE00DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

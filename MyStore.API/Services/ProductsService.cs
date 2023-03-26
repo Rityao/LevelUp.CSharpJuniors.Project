@@ -41,5 +41,22 @@ namespace MyStore.API.Services
             };
             await _productsRepository.Create(entity);
         }
+
+        public async Task DeleteProducts(Guid id)
+        {
+            await _productsRepository.Delete(id);
+        }
+
+        public async Task UpdateProducts(ProductItem productItem)
+        {
+            var entity = new ProductEntity
+            {
+                Id = productItem.Id,
+                Name = productItem.Name,
+                Description = productItem.Description,
+                CategoryId = productItem.CategoryId
+            };
+            await _productsRepository.Update(entity);
+        }
     }
 }

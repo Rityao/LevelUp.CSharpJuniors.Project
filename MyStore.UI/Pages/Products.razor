@@ -1,13 +1,59 @@
-﻿@page "/products/all"
+﻿@page "/products"
 @using MyStore.UI.Models
 @using MyStore.UI.Services
 
-@inject IProductsServiceProxy Proxy
+@inject IProductsServiceProxy ProductsServiceProxy
 
-<h3>Products</h3>
-@foreach (var product in _products)
+@*<section class="featured-products">
+    <div class="container">
+        <div class="row justify-content-center align-items-center text-center">
+            <div class="col-md-8">
+                <h2>Добро пожаловать!</h2>
+                <p class="mt-4 mb-4">Оцените наши товары.</p>
+            </div>
+        </div>
+        <div class="row mt-4">
+            @foreach (var product in _products)
+            {
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <img src="https://images.vexels.com/media/users/3/166265/isolated/lists/34755dc7208ebe0275412adca6723f22-cute-toast-emoji.png" class="card-img-top" alt="Sourdough">
+                            <h5 class="card-title">@($"{product.Name}")</h5>
+                            <p class="card-text">@($"{product.Description}")</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>*@
+
+@if(_products == null)
 {
-    <li>@($"{product.Id} - {product.Name} - {product.Description}")</li>
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in _products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 
 @code {
@@ -15,6 +61,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        _products = await Proxy.GetAllProducts();
+        _products = await ProductsServiceProxy.GetAllProducts();
     }
 }

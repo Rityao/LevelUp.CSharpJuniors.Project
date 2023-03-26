@@ -18,6 +18,13 @@ namespace MyStore.API.DAL
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task Delete(Guid id)
+        {
+           var entity = await _dbContext.Products!.FirstOrDefaultAsync(e => e.Id.Equals(id));
+           _dbContext.Products!.Remove(entity);
+           await _dbContext.SaveChangesAsync();
+        }
+
         public Task<IEnumerable<ProductEntity>> GetAllProducts()
         {
             return Task.FromResult<IEnumerable<ProductEntity>>(_dbContext.Products!.ToList());
@@ -26,6 +33,12 @@ namespace MyStore.API.DAL
         public Task<ProductEntity?> GetProduct(Guid id)
         {
             return _dbContext.Products!.FirstOrDefaultAsync(e => e.Id.Equals(id));
+        }
+
+        public async Task Update(ProductEntity productEntity)
+        {
+            _dbContext.Products!.Update(productEntity);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

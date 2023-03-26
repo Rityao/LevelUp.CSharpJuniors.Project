@@ -37,5 +37,19 @@ namespace MyStore.API.Controllers
             await _productsService.AddProducts(productItem);
             return Ok();
         }
+
+        [HttpDelete("del")]
+        public async Task<IActionResult> DelProduct(Guid id)
+        {
+            await _productsService.DeleteProducts(id);
+            return Ok();
+        }
+
+        [HttpPut("upd")]
+        public async Task<IActionResult> UpdateProduct(ProductItem productItem)
+        {
+            await _productsService.UpdateProducts(productItem);
+            return Ok();
+        }
     }
 }
