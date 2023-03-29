@@ -10,4 +10,9 @@
     <None Remove="Pages\NewFile.txt" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Blazorise.Bootstrap" Version="1.2.2" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.2.2" />
+  </ItemGroup>
+
 </Project>
