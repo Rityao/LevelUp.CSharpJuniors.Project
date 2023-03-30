@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyStore.UI.Data;
 using System;
 
-namespace BlazorApp2.Data.Migrations
+namespace MyStore.UI.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("00000000000000_CreateIdentitySchema")]

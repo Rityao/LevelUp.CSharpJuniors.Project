@@ -5,7 +5,7 @@ using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.AspNetCore.Identity;
-using BlazorApp2.Areas.Identity;
+using MyStore.UI.Areas.Identity;
 using Microsoft.AspNetCore.Components.Authorization;
 using MyStore.UI.Data;
 using Microsoft.AspNetCore.Components.Web;

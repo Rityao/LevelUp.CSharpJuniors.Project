@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
-namespace BlazorApp2.Areas.Identity
+namespace MyStore.UI.Areas.Identity
 {
     public class RevalidatingIdentityAuthenticationStateProvider<TUser>
         : RevalidatingServerAuthenticationStateProvider where TUser : class
