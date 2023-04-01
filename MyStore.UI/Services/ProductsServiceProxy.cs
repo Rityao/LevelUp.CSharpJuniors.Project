@@ -53,14 +53,6 @@ namespace MyStore.UI.Services
             return item!;
         }
 
-        public async Task UpdateProduct(ProductItem productItem)
-        {
-            var requestUri = $"{_endpoints.BaseUrl}{_endpoints.UpdateProduct}";
-            requestUri = string.Format(requestUri);
-            await MakePost<ProductItem>(requestUri);
-            _navigationManager.NavigateTo("/nomenclature");
-        }
-
 
         private async Task<T?> MakeGet<T>(string requestUri)
         {
@@ -88,6 +80,14 @@ namespace MyStore.UI.Services
             var result = await response.Content.ReadFromJsonAsync<T>();
 
             return result;
+        }
+
+        public async Task UpdateProduct(ProductItem productItem)
+        {
+            var requestUri = $"{_endpoints.BaseUrl}{_endpoints.UpdateProduct}";
+            requestUri = string.Format(requestUri);
+            await MakePost<ProductItem>(requestUri);
+            _navigationManager.NavigateTo("/nomenclature");
         }
 
         private async Task<T?> MakePost<T>(string requestUri)
