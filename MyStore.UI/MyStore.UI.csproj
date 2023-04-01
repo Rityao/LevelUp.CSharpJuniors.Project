@@ -30,4 +30,8 @@
     <None Include="Areas\Identity\Pages\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\img\gallery\" />
+  </ItemGroup>
+
 </Project>

@@ -5,5 +5,7 @@ namespace MyStore.UI.Services
     {
         Task<IEnumerable<ProductItem>> GetAllProducts();
         Task<ProductItem> GetProductById(Guid id);
+        Task DeleteProducts(Guid id);
+        Task UpdateProducts(ProductItem productItem);
     } 
 }

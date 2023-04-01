@@ -1,9 +1,48 @@
-﻿@page "/product"
+﻿@page "/product/{Id:guid}"
 @using MyStore.UI.Models
 @using MyStore.UI.Services
+@using Blazorise.Icons.FontAwesome
 
 @inject IProductsServiceProxy ProductsServiceProxy
 
+@if (_storeItemInfo is not null)
+{
+    <CardBody>
+        <CardText>
+            <Div>
+                Наименование: <TextEdit @bind-Text="_storeItemInfo.Name"/>
+            </Div>
+            <Div>
+                Описание: <TextEdit @bind-Text="_storeItemInfo.Description"/>
+            </Div>
+        </CardText>
+       @* <Button Color = "Color.Success" Margin="Margin.Is2.FromTop">
+            Cохранить <Icon Name="IconName.Save"/>
+    </Button>
+        <button type="submit" class="btn btn-primary">Обновить</button>
+    <button type="button" class="btn btn-danger" @onclick="DeleteProduct">Удалить</button>
+    *@
+    </CardBody>
+}
+else
+{
+    <h3>Загружаем продукт...</h3>
+}
+
 @code {
+    private StoreItemInfo? _storeItemInfo;
+    [Parameter]
+    public Guid Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var product = await ProductsServiceProxy.GetProductById(Id);
+        _storeItemInfo = new StoreItemInfo
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description
+            };
+    }
 
 }

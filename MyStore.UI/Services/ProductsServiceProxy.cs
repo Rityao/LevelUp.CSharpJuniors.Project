@@ -15,6 +15,11 @@ namespace MyStore.UI.Services
             _endpoints = endpoints.Value;
         }
 
+        public Task DeleteProducts(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<ProductItem>> GetAllProducts()
         {
             var requestUri = $"{_endpoints.BaseUrl}{_endpoints.GetAllProducts}";
@@ -31,6 +36,11 @@ namespace MyStore.UI.Services
             var item = await MakeGet<ProductItem>(requestUri);
 
             return item!;
+        }
+
+        public Task UpdateProducts(ProductItem productItem)
+        {
+            throw new NotImplementedException();
         }
 
         private async Task<T?> MakeGet<T>(string requestUri)
