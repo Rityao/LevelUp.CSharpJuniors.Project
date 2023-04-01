@@ -3,33 +3,27 @@
 @using MyStore.UI.Services
 
 @inject IProductsServiceProxy ProductsServiceProxy
+@inject NavigationManager Navigation
 
-@if (_products == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in _products)
-            {
-                <tr>
-                    <td>@product.Id</td>
-                    <td>@product.Name</td>
-                    <td>@product.Description</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+<h3>Nomenclature</h3>
+<br>
+<Table Striped>
+    <TableHeader>
+        <TableHeaderCell>Id</TableHeaderCell>
+        <TableHeaderCell>Наименование</TableHeaderCell>
+        <TableHeaderCell>Описание</TableHeaderCell>
+    </TableHeader>
+    <TableBody>
+        @foreach (var product in _products)
+        {
+            <TableRow DoubleClicked="@(()=> Navigation.NavigateTo($"/product/{product.Id}"))">
+                <TableRowCell>@product.Id</TableRowCell>
+                <TableRowCell>@product.Name</TableRowCell>
+                <TableRowCell>@product.Description</TableRowCell>
+            </TableRow>
+        }
+    </TableBody>
+</Table>
 
 @code {
     private IEnumerable<ProductItem> _products = Enumerable.Empty<ProductItem>();
