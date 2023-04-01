@@ -19,9 +19,9 @@
        @* <Button Color = "Color.Success" Margin="Margin.Is2.FromTop">
             Cохранить <Icon Name="IconName.Save"/>
     </Button>
-        <button type="submit" class="btn btn-primary">Обновить</button>
-    <button type="button" class="btn btn-danger" @onclick="DeleteProduct">Удалить</button>
     *@
+        <button type="button" class="btn btn-primary" @onclick="UpdateProduct">Сохранить</button>
+        <button type="button" class="btn btn-danger" @onclick="DeleteProduct">Удалить</button>
     </CardBody>
 }
 else
@@ -37,6 +37,22 @@ else
     protected override async Task OnInitializedAsync()
     {
         var product = await ProductsServiceProxy.GetProductById(Id);
+        _storeItemInfo = new StoreItemInfo
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description
+            };
+    }
+    async Task DeleteProduct()
+    {
+        await ProductsServiceProxy.DeleteProduct(Id);
+    }
+    
+    async Task UpdateProduct()
+    {
+        var product = await ProductsServiceProxy.GetProductById(Id);
+        await ProductsServiceProxy.UpdateProduct(product);
         _storeItemInfo = new StoreItemInfo
             {
                 Id = product.Id,

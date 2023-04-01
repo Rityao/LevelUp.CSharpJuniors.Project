@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Options;
 using MyStore.UI.Models;
 
 namespace MyStore.UI.Services
@@ -9,15 +10,29 @@ namespace MyStore.UI.Services
 
         private readonly Endpoints _endpoints;
 
-        public ProductsServiceProxy(HttpClient client, IOptions<Endpoints> endpoints)
+        private readonly NavigationManager _navigationManager;
+
+
+        public ProductsServiceProxy(HttpClient client, IOptions<Endpoints> endpoints, NavigationManager navigationManager)
         {
             _client = client;
             _endpoints = endpoints.Value;
+            _navigationManager = navigationManager;
         }
 
-        public Task DeleteProducts(Guid id)
+        public Task AddProduct(ProductItem productItem)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task DeleteProduct(Guid id)
+        {
+            var requestUri = $"{_endpoints.BaseUrl}{_endpoints.DeleteProduct}";
+            requestUri = string.Format(requestUri, id);
+            
+            await MakeDelete<ProductItem>(requestUri);
+            _navigationManager.NavigateTo("/nomenclature");
+
         }
 
         public async Task<IEnumerable<ProductItem>> GetAllProducts()
@@ -38,16 +53,48 @@ namespace MyStore.UI.Services
             return item!;
         }
 
-        public Task UpdateProducts(ProductItem productItem)
+        public async Task UpdateProduct(ProductItem productItem)
         {
-            throw new NotImplementedException();
+            var requestUri = $"{_endpoints.BaseUrl}{_endpoints.UpdateProduct}";
+            requestUri = string.Format(requestUri);
+            await MakePost<ProductItem>(requestUri);
+            _navigationManager.NavigateTo("/nomenclature");
         }
+
 
         private async Task<T?> MakeGet<T>(string requestUri)
         {
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
+                RequestUri = new Uri(requestUri)
+            };
+
+            using var response = await _client.SendAsync(request);
+            var result = await response.Content.ReadFromJsonAsync<T>();
+
+            return result;
+        }
+
+        private async Task<T?> MakeDelete<T>(string requestUri)
+        {
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri(requestUri)
+            };
+
+            using var response = await _client.SendAsync(request);
+            var result = await response.Content.ReadFromJsonAsync<T>();
+
+            return result;
+        }
+
+        private async Task<T?> MakePost<T>(string requestUri)
+        {
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
                 RequestUri = new Uri(requestUri)
             };
 
