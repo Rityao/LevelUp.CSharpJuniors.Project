@@ -1,0 +1,41 @@
+﻿@page "/nomenclature"
+@using MyStore.UI.Models
+@using MyStore.UI.Services
+
+@inject IProductsServiceProxy ProductsServiceProxy
+
+@if (_products == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in _products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private IEnumerable<ProductItem> _products = Enumerable.Empty<ProductItem>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _products = await ProductsServiceProxy.GetAllProducts();
+    }
+}
