@@ -30,7 +30,8 @@ namespace MyStore.UI.Services
             var requestUri = $"{_endpoints.BaseUrl}{_endpoints.DeleteProduct}";
             requestUri = string.Format(requestUri, id);
             
-            await MakeDelete<ProductItem>(requestUri);
+           // await MakeDelete<ProductItem>(requestUri);
+            await _client.DeleteAsync(requestUri);
             _navigationManager.NavigateTo("/nomenclature");
 
         }
@@ -68,34 +69,24 @@ namespace MyStore.UI.Services
             return result;
         }
 
-        private async Task<T?> MakeDelete<T>(string requestUri)
-        {
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Delete,
-                RequestUri = new Uri(requestUri)
-            };
-
-            using var response = await _client.SendAsync(request);
-            var result = await response.Content.ReadFromJsonAsync<T>();
-
-            return result;
-        }
-
         public async Task UpdateProduct(ProductItem productItem)
         {
             var requestUri = $"{_endpoints.BaseUrl}{_endpoints.UpdateProduct}";
             requestUri = string.Format(requestUri);
-            await MakePost<ProductItem>(requestUri);
+           // HttpContent _content = new ;
+             await MakePut<ProductItem>(requestUri);
+           //  await _client.PutAsy(requestUri, _content);
+            
             _navigationManager.NavigateTo("/nomenclature");
         }
 
-        private async Task<T?> MakePost<T>(string requestUri)
+        private async Task<T?> MakePut<T>(string requestUri)
         {
             var request = new HttpRequestMessage
             {
-                Method = HttpMethod.Post,
+                Method = HttpMethod.Put,
                 RequestUri = new Uri(requestUri)
+                
             };
 
             using var response = await _client.SendAsync(request);
