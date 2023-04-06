@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Options;
 using MyStore.UI.Models;
+using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 
 namespace MyStore.UI.Services
 {
@@ -18,11 +21,6 @@ namespace MyStore.UI.Services
             _client = client;
             _endpoints = endpoints.Value;
             _navigationManager = navigationManager;
-        }
-
-        public Task AddProduct(ProductItem productItem)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task DeleteProduct(Guid id)
@@ -69,14 +67,23 @@ namespace MyStore.UI.Services
             return result;
         }
 
-        public async Task UpdateProduct(ProductItem productItem)
+        public async Task UpdateProduct(StoreItemInfo storeItemInfo)
         {
             var requestUri = $"{_endpoints.BaseUrl}{_endpoints.UpdateProduct}";
-            requestUri = string.Format(requestUri);
-           // HttpContent _content = new ;
-             await MakePut<ProductItem>(requestUri);
-           //  await _client.PutAsy(requestUri, _content);
+            var uri = string.Format(requestUri);
+            ProductItem updatedProduct = new()
+            {
+                Name = storeItemInfo.Name,
+                Description = storeItemInfo.Description,
+                Id = storeItemInfo.Id,
+                CategoryId = Guid.NewGuid(),
+            };
+            var prod = JsonSerializer.Serialize(updatedProduct);
+            var requestContent = new StringContent(prod, Encoding.UTF8, "application/json");
             
+            var response = await _client.PutAsync(uri, requestContent);
+            response.EnsureSuccessStatusCode();
+
             _navigationManager.NavigateTo("/nomenclature");
         }
 
@@ -93,6 +100,26 @@ namespace MyStore.UI.Services
             var result = await response.Content.ReadFromJsonAsync<T>();
 
             return result;
+        }
+
+        public async Task AddProduct(StoreItemInfo storeItemInfo)
+        {
+            var requestUri = $"{_endpoints.BaseUrl}{_endpoints.AddProduct}";
+            var uri = string.Format(requestUri);
+            ProductItem newProduct = new()
+            {
+                Name = storeItemInfo.Name,
+                Description = storeItemInfo.Description,
+                Id = Guid.NewGuid(),
+                CategoryId = Guid.NewGuid(),
+            };
+            var prod = JsonSerializer.Serialize(newProduct);
+            var requestContent = new StringContent(prod, Encoding.UTF8, "application/json");
+
+            var response = await _client.PostAsync(uri, requestContent);
+            response.EnsureSuccessStatusCode();
+
+            _navigationManager.NavigateTo("/nomenclature");
         }
     }
 }

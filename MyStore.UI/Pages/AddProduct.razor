@@ -1,0 +1,38 @@
+﻿@page "/addproduct"
+@using MyStore.UI.Models
+@using MyStore.UI.Services
+@using Blazorise.Icons.FontAwesome
+
+@inject IProductsServiceProxy ProductsServiceProxy
+
+<CardBody>
+        <CardText>
+            <Div>
+                Наименование: <TextEdit @bind-Value="@_storeItemInfo.Name" />
+            </Div>
+            <Div>
+                Описание: <TextEdit @bind-Value="@_storeItemInfo.Description" />
+            </Div>
+        </CardText>
+
+        <button type="button" class="btn btn-primary" @onclick="AddingProduct">Добавить</button>
+    </CardBody>
+
+@code {
+    private StoreItemInfo? _storeItemInfo = new(Guid.NewGuid(), "ывиыв", "чаивви");
+
+    async Task AddingProduct()
+    {   
+        //var product = new ProductItem
+        //    {
+        //        Id = Id,
+        //        Name = _storeItemInfo.Name,
+        //        Description = _storeItemInfo.Description,
+        //        CategoryId = Guid.NewGuid()
+        //    };
+
+        await ProductsServiceProxy.AddProduct(_storeItemInfo);
+
+    }
+
+}

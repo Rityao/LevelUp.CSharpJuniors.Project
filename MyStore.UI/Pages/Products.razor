@@ -4,31 +4,6 @@
 
 @inject IProductsServiceProxy ProductsServiceProxy
 
-@*<section class="featured-products">
-    <div class="container">
-        <div class="row justify-content-center align-items-center text-center">
-            <div class="col-md-8">
-                <h2>Добро пожаловать!</h2>
-                <p class="mt-4 mb-4">Оцените наши товары.</p>
-            </div>
-        </div>
-        <div class="row mt-4">
-            @foreach (var product in _products)
-            {
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <img src="https://images.vexels.com/media/users/3/166265/isolated/lists/34755dc7208ebe0275412adca6723f22-cute-toast-emoji.png" class="card-img-top" alt="Sourdough">
-                            <h5 class="card-title">@($"{product.Name}")</h5>
-                            <p class="card-text">@($"{product.Description}")</p>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</section>*@
-
 @if(_products == null)
 {
     <p>Loading...</p>

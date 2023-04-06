@@ -16,10 +16,6 @@
                 Описание: <TextEdit @bind-Text="_storeItemInfo.Description"/>
             </Div>
         </CardText>
-       @* <Button Color = "Color.Success" Margin="Margin.Is2.FromTop">
-            Cохранить <Icon Name="IconName.Save"/>
-    </Button>
-    *@
         <button type="button" class="btn btn-primary" @onclick="UpdateProduct">Сохранить</button>
         <button type="button" class="btn btn-danger" @onclick="DeleteProduct">Удалить</button>
     </CardBody>
@@ -37,28 +33,24 @@ else
     protected override async Task OnInitializedAsync()
     {
         var product = await ProductsServiceProxy.GetProductById(Id);
-        _storeItemInfo = new StoreItemInfo
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description
-            };
+        _storeItemInfo.Id = Id;
+        _storeItemInfo.Name = product.Name;
+        _storeItemInfo.Description = product.Description;
     }
     async Task DeleteProduct()
     {
         await ProductsServiceProxy.DeleteProduct(Id);
     }
-    
+
     async Task UpdateProduct()
     {
         var product = await ProductsServiceProxy.GetProductById(Id);
-        await ProductsServiceProxy.UpdateProduct(product);
-        _storeItemInfo = new StoreItemInfo
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Description = product.Description
-            };
+
+        _storeItemInfo.Id = Id;
+        _storeItemInfo.Name = product.Name;
+        _storeItemInfo.Description = product.Description;
+
+        await ProductsServiceProxy.UpdateProduct(_storeItemInfo);
     }
 
 }
