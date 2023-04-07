@@ -9,15 +9,13 @@
 <br>
 <Table Striped>
     <TableHeader>
-        <TableHeaderCell>Id</TableHeaderCell>
         <TableHeaderCell>Наименование</TableHeaderCell>
         <TableHeaderCell>Описание</TableHeaderCell>
     </TableHeader>
     <TableBody>
         @foreach (var product in _products)
         {
-            <TableRow DoubleClicked="@(()=> Navigation.NavigateTo($"/product/{product.Id}"))">
-                <TableRowCell>@product.Id</TableRowCell>
+         <TableRow DoubleClicked="@(()=> Navigation.NavigateTo($"/product/{product.Id}"))">
                 <TableRowCell>@product.Name</TableRowCell>
                 <TableRowCell>@product.Description</TableRowCell>
             </TableRow>

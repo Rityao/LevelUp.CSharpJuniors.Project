@@ -10,25 +10,21 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in _products)
+    <Table Striped>
+    <TableHeader>
+        <TableHeaderCell>Наименование</TableHeaderCell>
+        <TableHeaderCell>Описание</TableHeaderCell>
+    </TableHeader>
+    <TableBody>
+        @foreach (var product in _products)
             {
-                <tr>
-                    <td>@product.Id</td>
-                    <td>@product.Name</td>
-                    <td>@product.Description</td>
-                </tr>
+                <TableRow>
+                    <TableRowCell>@product.Name</TableRowCell>
+                    <TableRowCell>@product.Description</TableRowCell>
+                </TableRow>
             }
-        </tbody>
-    </table>
+        </TableBody>
+    </Table>
 }
 
 @code {
