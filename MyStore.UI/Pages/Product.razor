@@ -10,10 +10,10 @@
     <CardBody>
         <CardText>
             <Div>
-                Наименование: <TextEdit @bind-Text="_storeItemInfo.Name"/>
+                Наименование: <TextEdit @bind-Text="@_storeItemInfo.Name" />
             </Div>
             <Div>
-                Описание: <TextEdit @bind-Text="_storeItemInfo.Description"/>
+                Описание: <TextEdit @bind-Text="@_storeItemInfo.Description"/>
             </Div>
         </CardText>
         <button type="button" class="btn btn-primary" @onclick="UpdateProduct">Сохранить</button>
@@ -26,16 +26,14 @@ else
 }
 
 @code {
-    private StoreItemInfo? _storeItemInfo;
     [Parameter]
     public Guid Id { get; set; }
+    public StoreItemInfo? _storeItemInfo;
 
     protected override async Task OnInitializedAsync()
     {
         var product = await ProductsServiceProxy.GetProductById(Id);
-        _storeItemInfo.Id = Id;
-        _storeItemInfo.Name = product.Name;
-        _storeItemInfo.Description = product.Description;
+
     }
     async Task DeleteProduct()
     {

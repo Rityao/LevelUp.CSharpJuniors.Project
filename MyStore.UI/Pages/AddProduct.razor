@@ -8,10 +8,10 @@
 <CardBody>
         <CardText>
             <Div>
-                Наименование: <TextEdit @bind-Value="@_storeItemInfo.Name" />
+                Наименование: <TextEdit @bind-Text="@_storeItemInfo.Name" />
             </Div>
             <Div>
-                Описание: <TextEdit @bind-Value="@_storeItemInfo.Description" />
+                Описание: <TextEdit @bind-Text="@_storeItemInfo.Description" />
             </Div>
         </CardText>
 
@@ -19,20 +19,11 @@
     </CardBody>
 
 @code {
-    private StoreItemInfo? _storeItemInfo = new(Guid.NewGuid(), "ывиыв", "чаивви");
+    private StoreItemInfo? _storeItemInfo = new(Guid.NewGuid(), "", "");
 
     async Task AddingProduct()
-    {   
-        //var product = new ProductItem
-        //    {
-        //        Id = Id,
-        //        Name = _storeItemInfo.Name,
-        //        Description = _storeItemInfo.Description,
-        //        CategoryId = Guid.NewGuid()
-        //    };
-
+    {  
         await ProductsServiceProxy.AddProduct(_storeItemInfo);
-
     }
 
 }
