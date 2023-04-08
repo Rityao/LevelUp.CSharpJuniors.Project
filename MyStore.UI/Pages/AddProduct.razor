@@ -4,7 +4,7 @@
 @using Blazorise.Icons.FontAwesome
 
 @inject IProductsServiceProxy ProductsServiceProxy
-
+<h3>Карточка продукта: </h3>
 <CardBody>
         <CardText>
             <Div>
@@ -13,6 +13,9 @@
             <Div>
                 Описание: <TextEdit @bind-Text="p.Desc" />
             </Div>
+            <Div>
+            Цена: <TextEdit @bind-Text="p.Price" />
+            </Div>
         </CardText>
 
         <button type="button" class="btn btn-primary" @onclick="AddingProduct">Добавить</button>
@@ -20,7 +23,7 @@
 
 @code {
     private StoreItemInfo? _storeItemInfo;
-    ProductE p = new("", "");
+    ProductE p = new("", "", "");
 
     async Task AddingProduct()
     {  
@@ -28,7 +31,8 @@
             {
                 Id = Guid.NewGuid(),
                 Name = p.Name,
-                Description = p.Desc
+                Description = p.Desc,
+                Price = p.Price
             };
         await ProductsServiceProxy.AddProduct(_storeItemInfo);
     }
@@ -37,8 +41,9 @@
     {
         public string? Name { get; set; }
         public string? Desc { get; set; }
+        public string? Price { get; set; }
 
-        public ProductE(string Name, string Desc)
+        public ProductE(string Name, string Desc, string Price)
         {
         }
     }

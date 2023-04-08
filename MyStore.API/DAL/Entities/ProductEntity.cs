@@ -13,6 +13,8 @@ namespace MyStore.API.DAL.Entities
         public string? Description { get; init; }
         public bool IsActive { get; init; }
 
+        public decimal Price { get; init; } 
+
         public IEnumerable<PropertyValue> Properties { get; set; } = Enumerable.Empty<PropertyValue>();
 
     }

@@ -27,8 +27,6 @@ namespace MyStore.UI.Services
         {
             var requestUri = $"{_endpoints.BaseUrl}{_endpoints.DeleteProduct}";
             requestUri = string.Format(requestUri, id);
-            
-           // await MakeDelete<ProductItem>(requestUri);
             await _client.DeleteAsync(requestUri);
             _navigationManager.NavigateTo("/nomenclature");
 
@@ -77,6 +75,7 @@ namespace MyStore.UI.Services
                 Description = storeItemInfo.Description,
                 Id = storeItemInfo.Id,
                 CategoryId = Guid.NewGuid(),
+                Price = decimal.Parse(storeItemInfo.Price)
             };
             var prod = JsonSerializer.Serialize(updatedProduct);
             var requestContent = new StringContent(prod, Encoding.UTF8, "application/json");
@@ -85,21 +84,6 @@ namespace MyStore.UI.Services
             response.EnsureSuccessStatusCode();
 
             _navigationManager.NavigateTo("/nomenclature");
-        }
-
-        private async Task<T?> MakePut<T>(string requestUri)
-        {
-            var request = new HttpRequestMessage
-            {
-                Method = HttpMethod.Put,
-                RequestUri = new Uri(requestUri)
-                
-            };
-
-            using var response = await _client.SendAsync(request);
-            var result = await response.Content.ReadFromJsonAsync<T>();
-
-            return result;
         }
 
         public async Task AddProduct(StoreItemInfo storeItemInfo)
@@ -112,6 +96,7 @@ namespace MyStore.UI.Services
                 Description = storeItemInfo.Description,
                 Id = Guid.NewGuid(),
                 CategoryId = Guid.NewGuid(),
+                Price = decimal.Parse(storeItemInfo.Price)
             };
             var prod = JsonSerializer.Serialize(newProduct);
             var requestContent = new StringContent(prod, Encoding.UTF8, "application/json");

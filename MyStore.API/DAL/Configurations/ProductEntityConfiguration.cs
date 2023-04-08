@@ -25,6 +25,11 @@ namespace MyStore.API.DAL.Configurations
                 .HasColumnType("uniqueidentifier")
                 .HasMaxLength(300);
 
+            builder.Property(e => e.Price)
+                .IsRequired()
+                .HasColumnType("decimal")
+                .HasPrecision(18,2);
+
             builder.HasIndex(e => e.CategoryId);
         }
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<UserEntity> builder)
