@@ -12,7 +12,7 @@ using MyStore.API.DAL;
 namespace MyStore.API.DAL.Migrations
 {
     [DbContext(typeof(ProductsDbContext))]
-    [Migration("20230325182356_InitDatabase")]
+    [Migration("20230408144618_InitDatabase")]
     partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -45,6 +45,10 @@ namespace MyStore.API.DAL.Migrations
                         .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
+
+                    b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 

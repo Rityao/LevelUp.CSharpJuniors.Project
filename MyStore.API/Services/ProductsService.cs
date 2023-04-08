@@ -37,7 +37,8 @@ namespace MyStore.API.Services
                 Id = productItem.Id,
                 Name = productItem.Name,
                 Description = productItem.Description,
-                CategoryId = productItem.CategoryId
+                CategoryId = productItem.CategoryId,
+                Price = productItem.Price
             };
             await _productsRepository.Create(entity);
         }
@@ -54,7 +55,8 @@ namespace MyStore.API.Services
                 Id = productItem.Id,
                 Name = productItem.Name,
                 Description = productItem.Description,
-                CategoryId = productItem.CategoryId
+                CategoryId = productItem.CategoryId,
+                Price = productItem.Price
             };
             await _productsRepository.Update(entity);
         }

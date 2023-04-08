@@ -11,6 +11,7 @@
     <TableHeader>
         <TableHeaderCell>Наименование</TableHeaderCell>
         <TableHeaderCell>Описание</TableHeaderCell>
+        <TableHeaderCell>Цена</TableHeaderCell>
     </TableHeader>
     <TableBody>
         @foreach (var product in _products)
@@ -18,6 +19,7 @@
          <TableRow DoubleClicked="@(()=> Navigation.NavigateTo($"/product/{product.Id}"))">
                 <TableRowCell>@product.Name</TableRowCell>
                 <TableRowCell>@product.Description</TableRowCell>
+                <TableRowCell>@product.Price</TableRowCell>
             </TableRow>
         }
     </TableBody>
